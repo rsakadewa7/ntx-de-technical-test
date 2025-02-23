@@ -1,2 +1,18 @@
-version: "3"
 services:
+  api:
+    build: ./api
+    ports:
+      - "6000:6000"
+    networks:
+      - my_network
+
+  etl:
+    build: ./etl
+    depends_on:
+      - api
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
